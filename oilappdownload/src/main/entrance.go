@@ -13,7 +13,7 @@ import (
 var filepath string
 var staticHandler http.Handler
 func init()  {
-	filepath ="/Users/huxiaoning/Downloads/app-alli-debug.apk"
+	filepath ="/usr/local/image/oil/myapp/app-myapp-release.apk"
 
 	staticHandler = http.FileServer(http.Dir(filepath))
 }
