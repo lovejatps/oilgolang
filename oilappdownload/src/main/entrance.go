@@ -4,16 +4,18 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"log"
 	"time"
 	"fmt"
 	"net/url"
+	"os/exec"
+	"test"
 )
 
 var filepath string
 var staticHandler http.Handler
 func init()  {
 	filepath ="/usr/local/image/oil/myapp/app-myapp-release.apk"
+
 
 	staticHandler = http.FileServer(http.Dir(filepath))
 }
@@ -27,27 +29,51 @@ func main() {
 
 	quit := make(chan os.Signal)
 	signal.Notify(quit, os.Interrupt)
+	test.Tprgo()
+	test.Tialgo()
 
-	mux := http.NewServeMux()
-	mux.HandleFunc("/downloadapp",APPdownload)
+
+	//
+	//mux := http.NewServeMux()
+	//mux.HandleFunc("/downloadapp",APPdownload)
+	//mux.HandleFunc("/shellmac",Redshell)
+	//
+	//
+	//server := http.Server{
+	//	Addr:         ":9001",
+	//	ReadTimeout:  60 * time.Second,
+	//	WriteTimeout: 60 * time.Second,
+	//	Handler:mux,
+	//}
+	//
+	//err := server.ListenAndServe()
+	//if err != nil {
+	//	if err == http.ErrServerClosed {
+	//		log.Print("Server closed under requeset!!")
+	//	} else {
+	//		log.Fatal("Server closed unexpecteed!!")
+	//	}
+	//
+	//}
+
+}
 
 
-	server := http.Server{
-		Addr:         ":9001",
-		ReadTimeout:  60 * time.Second,
-		WriteTimeout: 60 * time.Second,
-		Handler:mux,
+/**
+c执行shell命令 查看日志
+ */
+
+func Redshell(w http.ResponseWriter, r *http.Request){
+	fmt.Print("执行shell命令...")
+
+	tail := "tail -f -n2000 /Users/huxiaoning/Downloads/nginx.conf"
+	cmd := exec.Command("/bin/bash", "-c", tail)
+	output, err := cmd.Output()
+	if err != nil{
+		fmt.Print(w,err)
 	}
 
-	err := server.ListenAndServe()
-	if err != nil {
-		if err == http.ErrServerClosed {
-			log.Print("Server closed under requeset!!")
-		} else {
-			log.Fatal("Server closed unexpecteed!!")
-		}
-
-	}
+	w.Write(output)
 
 }
 
