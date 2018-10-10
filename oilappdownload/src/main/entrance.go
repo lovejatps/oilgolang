@@ -3,7 +3,6 @@ package main
 import (
 	"net/http"
 	"os"
-	"os/signal"
 	"time"
 	"fmt"
 	"net/url"
@@ -21,22 +20,23 @@ func init()  {
 }
 
 
-
 /**
 提供APP下载
 */
 func main() {
+	//test.T_slice()
+	//test.T_slicetow()
 
-	quit := make(chan os.Signal)
-	signal.Notify(quit, os.Interrupt)
-	test.Tprgo()
-	test.Tialgo()
-
-
+	test.HomeworkA(7)
+	//
+	//quit := make(chan os.Signal)
+	//signal.Notify(quit, os.Interrupt)
+	//
+	//
 	//
 	//mux := http.NewServeMux()
 	//mux.HandleFunc("/downloadapp",APPdownload)
-	//mux.HandleFunc("/shellmac",Redshell)
+	//mux.HandleFunc("/shellmac",test.Tialgo)
 	//
 	//
 	//server := http.Server{
