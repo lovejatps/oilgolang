@@ -28,6 +28,9 @@ func main() {
 	//test.T_slicetow()
 
 	test.HomeworkA(7)
+	test.HomeworkB("434jfjf94kkfkf   krej")
+	test.HomeworkC()
+	test.HomeworkD("12345","天上人间")
 	//
 	//quit := make(chan os.Signal)
 	//signal.Notify(quit, os.Interrupt)
